@@ -1,7 +1,0 @@
-{
-  "/[locale]/projets/page": "app/[locale]/projets/page.js",
-  "/[locale]/parcours/page": "app/[locale]/parcours/page.js",
-  "/[locale]/demarche-portfolio/page": "app/[locale]/demarche-portfolio/page.js",
-  "/[locale]/contact/page": "app/[locale]/contact/page.js",
-  "/[locale]/competences/page": "app/[locale]/competences/page.js"
-}
