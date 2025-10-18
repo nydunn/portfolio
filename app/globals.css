@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 1.25rem;
+}
+
+/* 🌌 Fond navy sombre (moins harsh que le noir) + texte clair */
+html, body {
+  /* dégradé bleu nuit très léger */
+  background: linear-gradient(180deg, #0e1a2b 0%, #0a1626 100%);
+  color: rgb(226 232 240); /* slate-200 */
+}
+
+.container-padded { @apply max-w-6xl mx-auto px-4 md:px-6; }
+
+/* 🧊 Cartes sombres (plus de confort que le blanc pur) */
+.card {
+  /* navy foncé translucide + légère blur pour du “verre fumé” */
+  background: rgba(16, 26, 42, 0.85);
+  backdrop-filter: blur(4px);
+  @apply rounded-2xl border p-6;
+  /* bord discret, pas trop contrasté */
+  border-color: rgba(255,255,255,0.08);
+  /* halo bleu-cyan doux */
+  box-shadow: 0 12px 30px rgba(3, 105, 161, 0.18);
+}
+
+/* Titres de cartes bien lisibles */
+.card h3 { @apply text-slate-50; }
+
+/* Texte des listes et paragraphes dans les cartes : gris clair doux */
+.card p,
+.card li { @apply text-slate-300; }
+
+/* Boutons */
+.btn {
+  @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 font-medium transition;
+}
+.btn-primary {
+  @apply btn bg-brand-500 text-white hover:bg-brand-600 active:scale-[.98];
+}
+/* Sur fond sombre, légère surbrillance discrète */
+.btn-ghost {
+  @apply btn bg-transparent hover:bg-white/10;
+}
+
+/* Titre dégradé bleu → cyan (reste punchy sur fond sombre) */
+.gradient-text {
+  background: linear-gradient(135deg, #3a90f0 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Titres & sous-titres de sections */
+.section-title { @apply text-3xl md:text-4xl font-bold mb-3; }
+.section-sub { @apply text-slate-300 mb-6; }

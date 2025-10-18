@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# builds
+dist/
+*.log
+
+# env
+.env
+.env.local
+.env.*.local
+
+# OS / éditeur
+.DS_Store
+Thumbs.db
+.vscode/

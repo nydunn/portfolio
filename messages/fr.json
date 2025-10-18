@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Portfolio BUT RT — G",
+    "description": "Portfolio académique — compétences, projets et démarche réflexive (S6)."
+  },
+  "nav": {
+    "home": "Accueil",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "timeline": "Parcours",
+    "portfolio": "Démarche portfolio",
+    "contact": "Contact"
+  },
+  "home": {
+    "heroTitle": "Guider les réseaux, sécuriser l'information",
+    "heroSubtitle": "Étudiant·e en BUT Réseaux & Télécoms — 3e année (S6)",
+    "ctaProjects": "Voir mes projets",
+    "ctaContact": "Me contacter"
+  },
+  "skills": {
+    "title": "Compétences visées",
+    "subtitle": "Alignées sur le référentiel BUT RT — S6"
+  },
+  "projects": {
+    "title": "Projets & preuves",
+    "subtitle": "SAÉ, stage et alternance, avec éléments de preuve argumentés"
+  },
+  "timeline": {
+    "title": "Parcours",
+    "subtitle": "Études, stages et alternance"
+  },
+  "portfolio": {
+    "title": "Démarche portfolio",
+    "subtitle": "Posture réflexive, sélection d'éléments de preuve et analyse distanciée",
+    "sections": {
+      "intro": "Au semestre 6, le portfolio évalue mon niveau de compétence et ma capacité à le démontrer par des preuves argumentées (SAÉ, stages, alternance).",
+      "method": "Méthodologie",
+      "methodTxt": "Je relie chaque projet aux compétences ciblées. Pour chaque preuve, je précise le contexte, les contraintes, les choix effectués, et j'analyse résultats & axes d'amélioration.",
+      "growth": "Évolution",
+      "growthTxt": "De S1 à S6 : montée en complexité (sécurité, supervision, automatisation), professionnalisation (outillage, documentation), et collaboration.",
+      "evidence": "Choix des éléments de preuve",
+      "evidenceTxt": "Je sélectionne des preuves variées : extraits de config anonymisés, scripts, captures, tableaux de supervision, procédures, métriques (RTO, MTTR)."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Pour une prise de contact rapide",
+    "linkedin": "Mon LinkedIn",
+    "email": "M'écrire"
+  },
+  "footer": {
+    "rights": "© {{year}} G — Portfolio BUT RT"
+  }
+}

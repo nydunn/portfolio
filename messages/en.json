@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "BUT RT Portfolio — G",
+    "description": "Academic portfolio — skills, projects and reflective approach (S6)."
+  },
+  "nav": {
+    "home": "Home",
+    "skills": "Skills",
+    "projects": "Projects",
+    "timeline": "Timeline",
+    "portfolio": "Portfolio approach",
+    "contact": "Contact"
+  },
+  "home": {
+    "heroTitle": "Guiding networks, securing information",
+    "heroSubtitle": "BUT Networks & Telecom — 3rd year (S6)",
+    "ctaProjects": "View projects",
+    "ctaContact": "Contact me"
+  },
+  "skills": {
+    "title": "Targeted skills",
+    "subtitle": "Aligned with BUT RT — S6"
+  },
+  "projects": {
+    "title": "Projects & evidence",
+    "subtitle": "SAEs, internship and apprenticeship, with argued evidence"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "Studies, internships and apprenticeship"
+  },
+  "portfolio": {
+    "title": "Portfolio approach",
+    "subtitle": "Reflective stance, selected evidence and critical analysis",
+    "sections": {
+      "intro": "In semester 6, the portfolio assesses my skill level and my ability to demonstrate it with argued evidence (SAEs, internships, apprenticeship).",
+      "method": "Methodology",
+      "methodTxt": "I link each project to targeted skills. For each piece of evidence, I state context, constraints, choices, and analyze results & improvement areas.",
+      "growth": "Growth",
+      "growthTxt": "From S1 to S6: increased complexity (security, monitoring, automation), professionalization (tooling, documentation), and collaboration.",
+      "evidence": "Evidence selection",
+      "evidenceTxt": "I select varied evidence: anonymized configs, scripts, screenshots, monitoring dashboards, procedures, metrics (RTO, MTTR)."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch quickly",
+    "linkedin": "My LinkedIn",
+    "email": "Email me"
+  },
+  "footer": {
+    "rights": "© {{year}} G — BUT RT Portfolio"
+  }
+}
