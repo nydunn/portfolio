@@ -199,38 +199,6 @@ export default function LearningSection({ locale }: { locale: "fr" | "en" }) {
                 oxidized-web (UI)
               </a>
             </li>
-
-            {/* PDFs locaux dans le même dossier que la vidéo */}
-            <li>
-              <a
-                className="underline hover:no-underline"
-                href="/videos/learning/oxidized-intro.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {isFr ? "Intro Oxidized (PDF)" : "Oxidized Intro (PDF)"}
-              </a>
-            </li>
-            <li>
-              <a
-                className="underline hover:no-underline"
-                href="/videos/learning/oxidized-installation-debian.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {isFr ? "Installation Debian (PDF)" : "Debian install (PDF)"}
-              </a>
-            </li>
-            <li>
-              <a
-                className="underline hover:no-underline"
-                href="/videos/learning/oxidized-web-guide.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {isFr ? "Guide oxidized-web (PDF)" : "oxidized-web guide (PDF)"}
-              </a>
-            </li>
             <li>
               <a
                 className="underline hover:no-underline"
