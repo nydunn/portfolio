@@ -1,0 +1,402 @@
+
+Building configuration...
+
+Current configuration : 7304 bytes
+!
+! Last configuration change at 07:10:46 UTC Fri Apr 1 2011
+! NVRAM config last updated at 08:21:04 UTC Fri Apr 1 2011
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname SWACC1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+switch 1 provision ws-c2960s-48fpd-l
+!
+!
+no ip domain-lookup
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/0/1
+ description Uplink Trunk vers CORESW2
+ switchport trunk native vlan 666
+ switchport trunk allowed vlan 10,20,30,99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/2
+ description Uplink Trunk vers CORESW1
+ switchport trunk native vlan 666
+ switchport trunk allowed vlan 10,20,30,99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/3
+ description Uplink vers switch virtuel
+ switchport trunk native vlan 666
+ switchport trunk allowed vlan 10,20
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/4
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/5
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/6
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/7
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/8
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/9
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/10
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/11
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/15
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/16
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/17
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/18
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/19
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/20
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/21
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/22
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/23
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/24
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/25
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/26
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/27
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/28
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/29
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/30
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/31
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/32
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/33
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/34
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/35
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/36
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/37
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/38
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/39
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/40
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/41
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/42
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/43
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/44
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/45
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/46
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/47
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/48
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/49
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet1/0/50
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface TenGigabitEthernet1/0/1
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface TenGigabitEthernet1/0/2
+ description UNUSED
+ switchport access vlan 666
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan99
+ description Management SVI
+ ip address 10.7.99.12 255.255.255.240
+!
+ip default-gateway 10.7.99.14
+ip http server
+ip http secure-server
+!
+!
+ip access-list standard MGMT_ONLY
+ permit 10.7.99.0 0.0.0.15
+ deny   any
+!
+!
+!
+line con 0
+line vty 0 4
+ access-class MGMT_ONLY in
+ login local
+ transport input ssh
+line vty 5 15
+ access-class MGMT_ONLY in
+ login local
+ transport input ssh
+!
+end
+

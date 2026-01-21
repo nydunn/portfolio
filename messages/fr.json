@@ -1,14 +1,14 @@
 {
   "meta": {
-    "title": "Portfolio BUT RT — G",
-    "description": "Portfolio académique — compétences, projets et démarche réflexive (S6)."
+    "title": "Portfolio BUT RT — Gabin Becu",
+    "description": "Portfolio académique — compétences, projets et preuves (S6)."
   },
   "nav": {
     "home": "Accueil",
     "skills": "Compétences",
     "projects": "Projets",
     "timeline": "Parcours",
-    "portfolio": "Démarche portfolio",
+    "portfolio": "Micro-learning",
     "contact": "Contact"
   },
   "home": {
@@ -18,8 +18,8 @@
     "ctaContact": "Me contacter"
   },
   "skills": {
-    "title": "Compétences visées",
-    "subtitle": "Alignées sur le référentiel BUT RT — S6"
+    "title": "Compétences",
+    "subtitle": "Acquises grâce au BUT Réseaux & Télécommunications"
   },
   "projects": {
     "title": "Projets & preuves",
@@ -30,17 +30,8 @@
     "subtitle": "Études, stages et alternance"
   },
   "portfolio": {
-    "title": "Démarche portfolio",
-    "subtitle": "Posture réflexive, sélection d'éléments de preuve et analyse distanciée",
-    "sections": {
-      "intro": "Au semestre 6, le portfolio évalue mon niveau de compétence et ma capacité à le démontrer par des preuves argumentées (SAÉ, stages, alternance).",
-      "method": "Méthodologie",
-      "methodTxt": "Je relie chaque projet aux compétences ciblées. Pour chaque preuve, je précise le contexte, les contraintes, les choix effectués, et j'analyse résultats & axes d'amélioration.",
-      "growth": "Évolution",
-      "growthTxt": "De S1 à S6 : montée en complexité (sécurité, supervision, automatisation), professionnalisation (outillage, documentation), et collaboration.",
-      "evidence": "Choix des éléments de preuve",
-      "evidenceTxt": "Je sélectionne des preuves variées : extraits de config anonymisés, scripts, captures, tableaux de supervision, procédures, métriques (RTO, MTTR)."
-    }
+    "title": "Micro-learning",
+    "subtitle": "Capsules courtes pour expliquer des notions/projets R&T"
   },
   "contact": {
     "title": "Contact",
@@ -49,6 +40,6 @@
     "email": "M'écrire"
   },
   "footer": {
-    "rights": "© {{year}} G — Portfolio BUT RT"
+    "rights": "© {{year}} Gabin Becu — Portfolio BUT RT"
   }
 }

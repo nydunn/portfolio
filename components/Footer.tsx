@@ -1,10 +1,22 @@
-export default function Footer({ t }: { t: any }) {
+import Link from "next/link";
+
+export default function Footer({ t, locale }: { t: any; locale: "fr" | "en" }) {
   const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-slate-200 mt-12">
-      <div className="container-padded py-6 text-sm text-slate-600 flex justify-between">
-        <span>{t.footer.rights.replace('{{year}}', String(year))}</span>
-        <span>Built with Next.js & Tailwind</span>
+    <footer className="mt-12 border-t border-white/10 bg-white/5">
+      <div className="container-padded py-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="text-sm text-slate-300">
+          {(t.footer?.rights ?? "© {{year}}").replace("{{year}}", String(year))}
+        </div>
+
+        {/* ✅ Au lieu de "Built by Tailwind..." -> bouton Contact */}
+        <Link
+          href={`/${locale}/contact`}
+          className="inline-flex items-center justify-center rounded-2xl px-4 py-2 bg-brand-500 text-white hover:bg-brand-600"
+        >
+          {t.nav?.contact ?? (locale === "fr" ? "Contact" : "Contact")}
+        </Link>
       </div>
     </footer>
   );

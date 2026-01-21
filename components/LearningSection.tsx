@@ -58,8 +58,8 @@ export default function LearningSection({ locale }: { locale: "fr" | "en" }) {
       title="Micro-learning"
       subtitle={
         isFr
-          ? "Courtes vidéos pédagogiques (R&T). D’autres vidéos arrivent bientôt."
-          : "Short learning videos (Networks & Telecom). More videos coming soon."
+          ? "Courtes vidéos pédagogiques (R&T)."
+          : "Short learning videos (Networks & Telecom)."
       }
     >
       {/* une seule colonne : la 2e vidéo est sous la 1re */}

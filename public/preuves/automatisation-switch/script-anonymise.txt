@@ -1,0 +1,297 @@
+import serial
+import time
+import sys
+import re
+
+# =====================
+# PARAMÈTRES FIXES
+# =====================
+BAUDRATE = 9600
+TIMEOUT = 1
+DAY0_ENABLE_SECRET = "<DAY0_ENABLE_SECRET>"  # TEMPORAIRE
+
+# =====================
+# UTILS
+# =====================
+
+def send_cmd(ser, cmd, delay=0.5):
+    print(f">>> {cmd}")
+    ser.write((cmd + "\r").encode())
+    ser.flush()
+    time.sleep(delay)
+
+def read_until(ser, patterns, timeout=60):
+    buffer = ""
+    start = time.time()
+    while time.time() - start < timeout:
+        if ser.in_waiting:
+            buffer += ser.read(ser.in_waiting).decode(errors="ignore")
+            for i, p in enumerate(patterns):
+                if re.search(p, buffer):
+                    return i, buffer
+        time.sleep(0.1)
+    return -1, buffer
+
+# =====================
+# DAY0
+# =====================
+
+def initialize_switch(ser):
+    print("Initialisation Day0 IOS-XE")
+    ser.write(b"\r")
+    time.sleep(2)
+
+    while True:
+        idx, _ = read_until(
+            ser,
+            [
+                r'Would you like to enter the initial configuration dialog\? \[yes/no\]:',
+                r'Enter enable secret:',
+                r'Confirm enable secret:',
+                r'Enter your selection \[[0-2]\]:',
+                r'Press RETURN to get started!',
+                r'Switch>'
+            ],
+            90
+        )
+
+        if idx == 0:
+            send_cmd(ser, "no")
+        elif idx == 1:
+            send_cmd(ser, DAY0_ENABLE_SECRET)
+        elif idx == 2:
+            send_cmd(ser, DAY0_ENABLE_SECRET)
+        elif idx == 3:
+            send_cmd(ser, "0")
+        elif idx == 4:
+            send_cmd(ser, "")
+        elif idx == 5:
+            break
+        else:
+            print("Erreur Day0")
+            sys.exit(1)
+
+# =====================
+# CONFIGURATION
+# =====================
+
+def enter_enable(ser):
+    send_cmd(ser, "enable")
+    send_cmd(ser, "terminal length 0")
+
+def generic_config(
+    ser,
+    hostname,
+    admin_user,
+    user_secret,
+    vlan_mgmt_id,
+    vlan_mgmt_ip,
+    vlan_mgmt_mask,
+    vlan_alt_id,
+    vlan_alt_ip,
+    vlan_alt_mask,
+    gateway,
+    dns_servers,
+    domain_name,
+    syslog_host,
+    snmp_ro_community,
+    snmp_location
+):
+    send_cmd(ser, "configure terminal")
+
+    send_cmd(ser, "clock timezone UTC 1 0")
+    send_cmd(ser, "clock summer-time UTC recurring last Sun Mar 2:00 last Sun Oct 3:00")
+
+    send_cmd(ser, "aaa new-model")
+    send_cmd(ser, "service password-encryption")
+    send_cmd(ser, "aaa authentication login default local")
+    send_cmd(ser, "aaa authorization exec default local")
+
+    send_cmd(ser, "login block-for 300 attempts 3 within 120")
+    send_cmd(ser, "login delay 2")
+    send_cmd(ser, "login on-failure log")
+    send_cmd(ser, "login on-success log")
+
+    send_cmd(ser, "transceiver type all monitoring")
+    send_cmd(ser, "lldp run")
+    send_cmd(ser, "aaa session-id common")
+
+    # DNS / Domaine (anonymisés)
+    send_cmd(ser, f"ip name-server {' '.join(dns_servers)}")
+    send_cmd(ser, f"ip domain list {domain_name}")
+    send_cmd(ser, "no ip domain lookup")
+    send_cmd(ser, f"ip domain name {domain_name}")
+
+    send_cmd(ser, "vtp mode transparent")
+    send_cmd(ser, "spanning-tree mode rapid-pvst")
+    send_cmd(ser, "spanning-tree loopguard default")
+    send_cmd(ser, "spanning-tree extend system-id")
+
+    send_cmd(ser, "errdisable recovery cause link-flap")
+    send_cmd(ser, "errdisable recovery interval 60")
+
+    # Compte admin (anonymisé)
+    send_cmd(ser, f"username {admin_user} privilege 15 secret {user_secret}")
+
+    # VLANs (noms neutralisés)
+    for vlan, name in [("101", "VLAN_A"), ("102", "VLAN_B"), ("103", "VLAN_C"), ("104", "VLAN_D")]:
+        send_cmd(ser, f"vlan {vlan}")
+        send_cmd(ser, f"name {name}")
+
+    send_cmd(ser, "interface Vlan1")
+    send_cmd(ser, "shutdown")
+
+    send_cmd(ser, f"interface Vlan{vlan_mgmt_id}")
+    send_cmd(ser, f"ip address {vlan_mgmt_ip} {vlan_mgmt_mask}")
+
+    send_cmd(ser, f"interface Vlan{vlan_alt_id}")
+    send_cmd(ser, f"ip address {vlan_alt_ip} {vlan_alt_mask}")
+
+    send_cmd(ser, f"ip default-gateway {gateway}")
+    send_cmd(ser, f"ip route 0.0.0.0 0.0.0.0 {gateway}")
+
+    # Syslog / SNMP (anonymisés)
+    send_cmd(ser, f"logging host {syslog_host}")
+    send_cmd(ser, f"snmp-server community {snmp_ro_community} RO 99")
+    send_cmd(ser, f"snmp-server location {snmp_location}")
+    send_cmd(ser, "ip ssh version 2")
+
+    # Bannière (anonymisée)
+    send_cmd(ser, "banner login ^C")
+    send_cmd(ser, "*********************************************")
+    send_cmd(ser, f"*              {hostname}                   *")
+    send_cmd(ser, "*      Authorized access only               *")
+    send_cmd(ser, "*      Organization / Site (redacted)       *")
+    send_cmd(ser, "*********************************************")
+    send_cmd(ser, "^C")
+
+    send_cmd(ser, f"hostname {hostname}")
+    send_cmd(ser, "end")
+
+def interface_config(ser, hostname):
+    send_cmd(ser, "configure terminal")
+
+    send_cmd(ser, "interface range gi1/0/1-3")
+    send_cmd(ser, "description ACCESS_PORTS")
+    send_cmd(ser, "switchport mode access")
+    send_cmd(ser, "switchport access vlan 102")
+    send_cmd(ser, "spanning-tree portfast")
+    send_cmd(ser, "spanning-tree bpduguard enable")
+
+    send_cmd(ser, "interface gi1/0/4")
+    send_cmd(ser, "description UNUSED_PORT")
+    send_cmd(ser, "shutdown")
+
+    send_cmd(ser, "interface range gi1/0/5-8")
+    send_cmd(ser, "description ACCESS_PLUS_VOICE")
+    send_cmd(ser, "switchport mode access")
+    send_cmd(ser, "switchport access vlan 101")
+    send_cmd(ser, "switchport voice vlan 102")
+    send_cmd(ser, "spanning-tree portfast")
+    send_cmd(ser, "spanning-tree bpduguard enable")
+
+    send_cmd(ser, "interface range gi1/0/9-10")
+    send_cmd(ser, "description DEVICE_PORTS")
+    send_cmd(ser, "switchport mode access")
+    send_cmd(ser, "switchport access vlan 102")
+    send_cmd(ser, "spanning-tree portfast")
+    send_cmd(ser, "spanning-tree bpduguard enable")
+
+    send_cmd(ser, "interface range gi1/0/11-12")
+    send_cmd(ser, "description TRUNK_UPLINK")
+    send_cmd(ser, "switchport mode trunk")
+    send_cmd(ser, "switchport trunk native vlan 101")
+    send_cmd(ser, "switchport trunk allowed vlan 101,103,104")
+
+    # Uplinks (descriptions anonymisées)
+    if "1" in hostname:
+        nb = input("Combien de switches ? (1 / 2 / 3) : ").strip()
+
+        send_cmd(ser, "interface GigabitEthernet1/1/1")
+        send_cmd(ser, "description UPLINK_ROUTER")
+        send_cmd(ser, "switchport mode trunk")
+
+        if nb in ["2", "3"]:
+            send_cmd(ser, "interface GigabitEthernet1/1/2")
+            send_cmd(ser, "description UPLINK_SWITCH2")
+            send_cmd(ser, "switchport mode trunk")
+
+        if nb == "3":
+            send_cmd(ser, "interface TenGigabitEthernet1/1/3")
+            send_cmd(ser, "description UPLINK_SWITCH3")
+            send_cmd(ser, "switchport mode trunk")
+    else:
+        send_cmd(ser, "interface GigabitEthernet1/1/1")
+        send_cmd(ser, "description UPLINK_SWITCH1")
+        send_cmd(ser, "switchport mode trunk")
+
+    send_cmd(ser, "end")
+
+def save_config(ser):
+    send_cmd(ser, "write memory", 3)
+
+# =====================
+# MAIN
+# =====================
+
+def main():
+    com = input("Quel port COM voulez-vous utiliser ? (ex: 6) : ").strip()
+    SERIAL_PORT = f"COM{com}"
+
+    ser = serial.Serial(SERIAL_PORT, BAUDRATE, timeout=TIMEOUT)
+    ser.setDTR(False)
+    ser.setRTS(False)
+
+    initialize_switch(ser)
+    enter_enable(ser)
+
+    print("\n=== PARAMÈTRES ===")
+    hostname = input("Hostname : ")
+
+    # Identité / secrets anonymisés
+    admin_user = input("Nom d'utilisateur admin : ")
+    user_secret = input("Secret utilisateur admin (hash Cisco) : ")
+
+    vlan_mgmt_id = input("ID VLAN management (ex: 101) : ")
+    vlan_mgmt_ip = input("IP VLAN management : ")
+    vlan_mgmt_mask = input("Masque VLAN management : ")
+
+    vlan_alt_id = input("ID VLAN secondaire (ex: 254) : ")
+    vlan_alt_ip = input("IP VLAN secondaire : ")
+    vlan_alt_mask = input("Masque VLAN secondaire : ")
+
+    gateway = input("Gateway : ")
+    dns_servers = input("DNS servers (séparés par espace) : ").split()
+    domain_name = input("Nom de domaine : ")
+
+    syslog_host = input("IP serveur Syslog : ")
+    snmp_ro_community = input("SNMP RO community : ")
+    snmp_location = input("SNMP location : ")
+
+    generic_config(
+        ser,
+        hostname,
+        admin_user,
+        user_secret,
+        vlan_mgmt_id,
+        vlan_mgmt_ip,
+        vlan_mgmt_mask,
+        vlan_alt_id,
+        vlan_alt_ip,
+        vlan_alt_mask,
+        gateway,
+        dns_servers,
+        domain_name,
+        syslog_host,
+        snmp_ro_community,
+        snmp_location
+    )
+
+    interface_config(ser, hostname)
+    save_config(ser)
+
+    ser.close()
+    print("Configuration terminée.")
+
+if __name__ == "__main__":
+    main()
