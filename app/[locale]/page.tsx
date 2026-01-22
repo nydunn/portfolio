@@ -4,6 +4,7 @@ import Section from "@/components/Section";
 import Card from "@/components/Card";
 import Timeline from "@/components/Timeline";
 
+
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const locale = params.locale;
   const isFr = locale === "fr";
