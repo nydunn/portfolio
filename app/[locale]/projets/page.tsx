@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
   const t = await getDictionary(params.locale);
   const isFr = params.locale === "fr";
 
-  const microLearningHref = `/${params.locale}/micro-learning`;
+  const microLearningHref = `/${params.locale}/demarche-portfolio`;
 
   return (
     <Section title={t.projects.title} subtitle={t.projects.subtitle}>
@@ -145,8 +145,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
             <p className="mt-2 text-xs text-slate-400">
               {isFr
-                ? "Chemins attendus : public/preuves/automatisation-switch/oxidized.png et public/videos/learning/Rapport.pdf"
-                : "Expected paths: public/preuves/automatisation-switch/oxidized.png and public/videos/learning/Rapport.pdf"}
+                ? "Documents supplémentaires"
+                : "More docs"}
             </p>
           </div>
         </Card>
@@ -265,8 +265,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
             <p className="mt-2 text-xs text-slate-400">
               {isFr
-                ? "Chemin attendu : public/preuves/automatisation-switch/script-anonymise.txt"
-                : "Expected path: public/preuves/automatisation-switch/script-anonymise.txt"}
+                ? "Documents supplémentaires"
+                : "More docs"}
             </p>
           </div>
         </Card>
@@ -415,12 +415,12 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
                 accsw1.txt <span className="text-slate-400">↗</span>
               </a>
               <a
-                href="/sae/sae501/accsw2.txt"
+                href="/sae/sae501/sujet.pdf"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-slate-100 hover:bg-white/10"
               >
-                accsw2.txt <span className="text-slate-400">↗</span>
+                sujet.pdf <span className="text-slate-400">↗</span>
               </a>
               <a
                 href="/sae/sae501/coresw1.txt"
@@ -442,8 +442,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
             <p className="mt-2 text-xs text-slate-400">
               {isFr
-                ? "Chemins attendus : public/sae/sae501/schema.png + confs .txt"
-                : "Expected paths: public/sae/sae501/schema.png + .txt configs"}
+                ? "Documents supplémentaires"
+                : "More docs"}
             </p>
           </div>
         </Card>

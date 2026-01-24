@@ -84,8 +84,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
             <p className="mt-2 text-xs text-slate-400">
               {isFr
-                ? "Chemin attendu : public/preuves/automatisation-switch/script-anonymise.txt"
-                : "Expected path: public/preuves/automatisation-switch/script-anonymise.txt"}
+                ? "Documents supplémentaires"
+                : "More docs"}
             </p>
           </div>
         </Card>
@@ -175,7 +175,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
                 {isFr ? "Sujet (PDF) :" : "Brief (PDF):"}
               </p>
               <a
-                href="/sae/sae501/sujet-sae501.pdf"
+                href="/sae/sae501/Sujet.pdf"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-slate-100 hover:bg-white/10"
@@ -214,8 +214,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
             <p className="mt-2 text-xs text-slate-400">
               {isFr
-                ? "Chemins attendus : public/sae/sae501/packet-tracer.png, sujet-sae501.pdf, accsw1/2.txt, coresw1/2.txt"
-                : "Expected paths: public/sae/sae501/packet-tracer.png, sujet-sae501.pdf, accsw1/2.txt, coresw1/2.txt"}
+               ? "Documents supplémentaires"
+                : "More docs"}
             </p>
           </div>
         </Card>
@@ -317,8 +317,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
             <p className="mt-2 text-xs text-slate-400">
               {isFr
-                ? "Chemins attendus : public/sae/sae503/dash.png et public/sae/sae503/rapport.pdf"
-                : "Expected paths: public/sae/sae503/dash.png and public/sae/sae503/rapport.pdf"}
+               ? "Documents supplémentaires"
+                : "More docs"}
             </p>
           </div>
         </Card>
